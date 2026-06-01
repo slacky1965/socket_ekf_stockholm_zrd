@@ -224,9 +224,27 @@ void user_init(bool isRetention)
     bdb_defaultReportingCfg(APP_ENDPOINT1, HA_PROFILE_ID, ZCL_CLUSTER_GEN_ON_OFF, ZCL_ATTRID_ONOFF,
             0, 65000, (uint8_t *)&reportableChange);
 
-//    /* OnOffCfg */
-//    bdb_defaultReportingCfg(APP_ENDPOINT1, HA_PROFILE_ID, ZCL_CLUSTER_GEN_ON_OFF_SWITCH_CONFIG, CUSTOM_ATTRID_DECOUPLED,
-//            0, 65000, (uint8_t *)&reportableChange);
+    uint16_t reportableChange_u16 = 0x01;
+
+    /* Energy */
+    uint64_t reportableChange_u64 = 0x10;
+    bdb_defaultReportingCfg(APP_ENDPOINT1, HA_PROFILE_ID, ZCL_CLUSTER_SE_METERING,
+            ZCL_ATTRID_CURRENT_SUMMATION_DELIVERD, 10, 65000, (uint8_t *)&reportableChange_u64);
+
+    /* Voltage */
+    reportableChange_u16 = 500;
+    bdb_defaultReportingCfg(APP_ENDPOINT1, HA_PROFILE_ID, ZCL_CLUSTER_MS_ELECTRICAL_MEASUREMENT,
+            ZCL_ATTRID_RMS_VOLTAGE, 10, 65000, (uint8_t *)&reportableChange_u16);
+
+    /* Current */
+    reportableChange_u16 = 5;
+    bdb_defaultReportingCfg(APP_ENDPOINT1, HA_PROFILE_ID, ZCL_CLUSTER_MS_ELECTRICAL_MEASUREMENT,
+            ZCL_ATTRID_RMS_CURRENT, 10, 65000, (uint8_t *)&reportableChange_u16);
+
+    /* Power */
+    int16_t reportableChange_s16 = 500;
+    bdb_defaultReportingCfg(APP_ENDPOINT1, HA_PROFILE_ID, ZCL_CLUSTER_MS_ELECTRICAL_MEASUREMENT,
+            ZCL_ATTRID_ACTIVE_POWER, 10, 65000, (uint8_t *)&reportableChange_s16);
 
     /* Initialize BDB */
     bdb_init((af_simple_descriptor_t *)&app_ep_simpleDesc, &g_bdbCommissionSetting, &g_zbBdbCb, 1);
