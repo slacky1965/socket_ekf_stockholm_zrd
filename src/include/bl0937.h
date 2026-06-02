@@ -23,6 +23,10 @@ void bl0937_expectedCurrent(float current);
 void bl0937_expectedVoltage(uint16_t voltage);
 void bl0937_expectedActivePower(uint16_t power);
 
+void bl0937_adjustVoltage(int8_t adjust);
+void bl0937_adjustCurrent(int8_t adjust);
+void bl0937_adjustPower(int8_t adjust);
+
 void bl0937_setMultipliers(float current_mul, float voltage_mul, float power_mul);
 void bl0937_resetMultipliers(void);
 

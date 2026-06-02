@@ -25,16 +25,20 @@
 #define TIME_RELOAD_MAX         60                  // sec
 #define VOLTAGE_MIN             0                   // 0V
 #define VOLTAGE_MAX             30000               // 300V
+#define ADJUST_MS_MIN          -99
+#define ADJUST_MS_MAX           100
 
 #define DEFAULT_CURRENT_MAX     1600                // 16A
 #define DEFAULT_POWER_MAX       3600                // 3600W
 #define DEFAULT_VOLTAGE_MIN     18000               // 180V
 #define DEFAULT_VOLTAGE_MAX     26000               // 260V
+#define DEFAULT_ADJUST_MS       0                   // -99 - -99% ... +100 - +100%, 0 - +0% for power, current and voltage
 #define DEFAULT_TIME_RELOAD     TIME_RELOAD_MIN     // 5sec
 #define DEFAULT_PROTECT_CONTROL PROTECT_CONTROL_OFF // 0 - off, 1 - on
 #define DEFAULT_AUTORESTART     AUTORESTART_OFF     // 0 - off, 1 - on
 #define DEFAULT_KEY_LOCK        KEY_LOCK_OFF        // 0 - off, 1 - on
 #define DEFAULT_LED_CONTROL     CONTROL_LED_ON_OFF  // if relay if on, LED is on, if relay is off, LED is off
+
 
 typedef struct{
     uint8_t keyType; /* CERTIFICATION_KEY or MASTER_KEY key for touch-link or distribute network
@@ -49,6 +53,9 @@ typedef struct __attribute__((packed)) {
     int16_t  power_max;
     int16_t  voltage_min;
     int16_t  voltage_max;
+    int8_t   adjust_current;
+    int8_t   adjust_power;
+    int8_t   adjust_voltage;
     uint16_t time_reload;
     uint8_t  protect_control;
     uint8_t  auto_restart;

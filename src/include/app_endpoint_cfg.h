@@ -89,15 +89,18 @@ typedef struct {
     uint16_t current_max;
     uint16_t current_multiplier;
     uint16_t current_divisor;
+    int8_t   adjust_current;
     int16_t  power;
     int16_t  power_max;
     uint16_t power_multiplier;
     uint16_t power_divisor;
+    int8_t   adjust_power;
     uint16_t voltage;
     int16_t  voltage_min;
     int16_t  voltage_max;
     uint16_t voltage_multiplier;
     uint16_t voltage_divisor;
+    int8_t   adjust_voltage;
     uint16_t time_reload;
     uint8_t  protect_control;
     uint8_t  auto_restart;
