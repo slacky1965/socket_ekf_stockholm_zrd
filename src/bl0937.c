@@ -258,34 +258,40 @@ void bl0937_expectedActivePower(uint16_t value)
     if (_power > 0) _power_multiplier *= ((float)value / (float)_power);
 }
 
-void bl0937_adjustVoltage(int8_t adjust) {
+void bl0937_adjustVoltage(float adjust) {
     zcl_msAttr_t *ms_attrs = zcl_msAttrsGet();
     ms_attrs->adjust_voltage = adjust;
-    socket_settings.adjust_voltage = adjust;
-    socket_settings_save();
+    if (socket_settings.adjust_voltage != adjust) {
+        socket_settings.adjust_voltage = adjust;
+        socket_settings_save();
+    }
     _calcDefaultVoltageMultiplier();
-    float factor = (100.0f + (float)adjust) / 100.0f;
+    float factor = (100.0f + adjust) / 100.0f;
     _voltage_multiplier *= factor;
     reset_voltage();
 }
 
-void bl0937_adjustCurrent(int8_t adjust) {
+void bl0937_adjustCurrent(float adjust) {
     zcl_msAttr_t *ms_attrs = zcl_msAttrsGet();
     ms_attrs->adjust_current = adjust;
-    socket_settings.adjust_current = adjust;
-    socket_settings_save();
+    if (socket_settings.adjust_current != adjust) {
+        socket_settings.adjust_current = adjust;
+        socket_settings_save();
+    }
     _calcDefaultCurrentMultiplier();
-    float factor = (100.0f + (float)adjust) / 100.0f;
+    float factor = (100.0f + adjust) / 100.0f;
     _current_multiplier *= factor;
 }
 
-void bl0937_adjustPower(int8_t adjust) {
+void bl0937_adjustPower(float adjust) {
     zcl_msAttr_t *ms_attrs = zcl_msAttrsGet();
     ms_attrs->adjust_power = adjust;
-    socket_settings.adjust_power = adjust;
-    socket_settings_save();
+    if (socket_settings.adjust_power != adjust) {
+        socket_settings.adjust_power = adjust;
+        socket_settings_save();
+    }
     _calcDefaulPowertMultiplier();
-    float factor = (100.0f + (float)adjust) / 100.0f;
+    float factor = (100.0f + adjust) / 100.0f;
     _power_multiplier   *= factor;
 }
 

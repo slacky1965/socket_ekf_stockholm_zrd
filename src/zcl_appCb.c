@@ -275,20 +275,35 @@ static void app_zclWriteReqCmd(uint8_t epId, uint16_t clusterId, zclWriteCmd_t *
                     save = true;
                 }
             } else if (attr[i].attrID == ZCL_ATTRID_CUSTOM_ADJUST_CURRENT) {
-                int8_t adjust = attr[i].attrData[0];
-                APP_DEBUG(DEBUG_ZCL_CB_EN, "adjust_current: %d\r\n", adjust);
+                float adjust;
+                uint8_t *pa = (uint8_t*)&adjust;
+                pa[0] = attr[i].attrData[0];
+                pa[1] = attr[i].attrData[1];
+                pa[2] = attr[i].attrData[2];
+                pa[3] = attr[i].attrData[3];
+                APP_DEBUG(DEBUG_ZCL_CB_EN, "adjust_current: %s\r\n", float_to_string(adjust, 2));
                 if (adjust >= ADJUST_MS_MIN && adjust <= ADJUST_MS_MAX) {
                     bl0937_adjustCurrent(adjust);
                 }
             } else if (attr[i].attrID == ZCL_ATTRID_CUSTOM_ADJUST_VOLTAGE) {
-                int8_t adjust = attr[i].attrData[0];
-                APP_DEBUG(DEBUG_ZCL_CB_EN, "adjust_voltage: %d\r\n", adjust);
+                float adjust;
+                uint8_t *pa = (uint8_t*)&adjust;
+                pa[0] = attr[i].attrData[0];
+                pa[1] = attr[i].attrData[1];
+                pa[2] = attr[i].attrData[2];
+                pa[3] = attr[i].attrData[3];
+                APP_DEBUG(DEBUG_ZCL_CB_EN, "adjust_voltage: %s\r\n", float_to_string(adjust, 2));
                 if (adjust >= ADJUST_MS_MIN && adjust <= ADJUST_MS_MAX) {
                     bl0937_adjustVoltage(adjust);
                 }
             } else if (attr[i].attrID == ZCL_ATTRID_CUSTOM_ADJUST_POWER) {
-                int8_t adjust = attr[i].attrData[0];
-                APP_DEBUG(DEBUG_ZCL_CB_EN, "adjust_power: %d\r\n", adjust);
+                float adjust;
+                uint8_t *pa = (uint8_t*)&adjust;
+                pa[0] = attr[i].attrData[0];
+                pa[1] = attr[i].attrData[1];
+                pa[2] = attr[i].attrData[2];
+                pa[3] = attr[i].attrData[3];
+                APP_DEBUG(DEBUG_ZCL_CB_EN, "adjust_power: %s\r\n", float_to_string(adjust, 2));
                 if (adjust >= ADJUST_MS_MIN && adjust <= ADJUST_MS_MAX) {
                     bl0937_adjustPower(adjust);
                 }
