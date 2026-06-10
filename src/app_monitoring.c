@@ -9,7 +9,7 @@
 #define PROTECT_CURRENT         0x02
 #define PROTECT_POWER           0x04
 #define PROTECT_VOLTAGE_SAVE    0x08
-#define VOLTAGE_ARRAY_NUM       10
+#define VOLTAGE_ARRAY_NUM       5
 
 ev_timer_event_t *timerAutoRestartEvt = NULL;
 
